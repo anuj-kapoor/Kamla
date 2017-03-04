@@ -2,35 +2,35 @@ package org.kamla.kapoor;
 
 public class Pattern {
 	
-	private int replacePattern;
+	private long replacePattern;
 	
 	private LeftRightPattern leftRightPattern;
 	
-	private int existingPattern;
+	private long existingPattern;
 	
-	private int count;
+	private long count;
 
-	public int getCount() {
+	public long getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(long count) {
 		this.count = count;
 	}
 
-	public int getReplacePattern() {
+	public long getReplacePattern() {
 		return replacePattern;
 	}
 
-	public void setReplacePattern(int replacePattern) {
+	public void setReplacePattern(long replacePattern) {
 		this.replacePattern = replacePattern;
 	}
 
-	public int getExistingPattern() {
+	public long getExistingPattern() {
 		return existingPattern;
 	}
 
-	public void setExistingPattern(int existingPattern) {
+	public void setExistingPattern(long existingPattern) {
 		this.existingPattern = existingPattern;
 	}
 

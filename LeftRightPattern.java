@@ -4,24 +4,24 @@ public enum LeftRightPattern {
 	
 	leftPattern,rightPattern,bothPattern,simplePattern;
 	
-	int maxSaving;
-	int maxLoss;
+	long maxSaving;
+	long maxLoss;
 
 
 
-	public int getMaxLoss() {
+	public long getMaxLoss() {
 		return maxLoss;
 	}
 
-	public void setMaxLoss(int maxLoss) {
+	public void setMaxLoss(long maxLoss) {
 		this.maxLoss = maxLoss;
 	}
 
-	public int getMaxSaving() {
+	public long getMaxSaving() {
 		return maxSaving;
 	}
 
-	public void setMaxSaving(int maxSaving) {
+	public void setMaxSaving(long maxSaving) {
 		this.maxSaving = maxSaving;
 	}
 

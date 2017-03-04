@@ -7,79 +7,35 @@ public class ZeroPattern {
 	
 	
 	
-	private Map<Integer,Integer> leftPattern ;
-	private Map<Integer,Integer>  rightPattern ;
-	private Map<Integer,Integer>  bothPattern ;
-	private Map<Integer,Integer>  simplePattern ;
+	private Map<Long,Long> leftPattern ;
+	private Map<Long,Long>  rightPattern ;
+	private Map<Long,Long>  bothPattern ;
+	private Map<Long,Long>  simplePattern ;
 
 	
 	
 	public ZeroPattern(){	
 		
-		leftPattern  = new HashMap<Integer,Integer>();
-		rightPattern = new HashMap<Integer,Integer>();
-		bothPattern = new HashMap<Integer,Integer>();
-		simplePattern = new HashMap<Integer,Integer>();
+		leftPattern  = new HashMap<Long,Long>();
+		rightPattern = new HashMap<Long,Long>();
+		bothPattern = new HashMap<Long,Long>();
+		simplePattern = new HashMap<Long,Long>();
 	}
 	
 
-	public Map<Integer, Integer> getSimplePattern() {
+	public Map<Long, Long> getSimplePattern() {
 		return simplePattern;
 	}
-
-
-
-
-	public void setSimplePattern(Map<Integer, Integer> simplePattern) {
-		this.simplePattern = simplePattern;
-	}
-
 	
-	public Map<Integer, Integer> getLeftPattern() {
+	public Map<Long, Long> getLeftPattern() {
 		return leftPattern;
 	}
 
-
-
-
-	public void setLeftPattern(Map<Integer, Integer> leftPattern) {
-		this.leftPattern = leftPattern;
-	}
-
-
-
-
-	public Map<Integer, Integer> getRightPattern() {
+	public Map<Long, Long> getRightPattern() {
 		return rightPattern;
 	}
 
-
-
-
-	public void setRightPattern(Map<Integer, Integer> rightPattern) {
-		this.rightPattern = rightPattern;
-	}
-
-
-
-
-	public Map<Integer, Integer> getBothPattern() {
+	public Map<Long, Long> getBothPattern() {
 		return bothPattern;
 	}
-
-
-
-
-	public void setBothPattern(Map<Integer, Integer> bothPattern) {
-		this.bothPattern = bothPattern;
-	}
-
-
-
-
-
-
-
-	
-	
 }
