@@ -14,13 +14,13 @@ public class PatternFinalizer {
 
 	private List<Pattern> patternQueue;
 	
-	private Map<Long ,boolean[]> dictionary ;
+	private Map<String ,Integer> dictionary ;
 	
 
 	public PatternFinalizer(ZeroPattern zeroPattern) {
 		this.zeroPattern = zeroPattern;
 		this.patternQueue  = new LinkedList<Pattern>();
-		this.dictionary = new HashMap<Long,boolean[]>();
+		this.dictionary = new HashMap<String,Integer>();
 		this.getPattern();
 		
 	}
@@ -148,7 +148,7 @@ public class PatternFinalizer {
 					patternFinalized = false;
 
 					if (key + 1 <= patternQueue.size() + 1) {
-						loss = (patternQueue.size() + 2 - key) * value;
+						loss = (patternQueue.size() + 2 - (key+1)) * value;
 						if (loss > maximumLossLeftPattern) {
 							maximumLossLeftPattern = loss;
 							maximumLossLeftKey = key;
@@ -168,7 +168,7 @@ public class PatternFinalizer {
 					patternFinalized = false;
 
 					if (key + 1 <= patternQueue.size() + 1) {
-						loss = (patternQueue.size() + 2 - key) * value;
+						loss = (patternQueue.size() + 2 - (key+1)) * value;
 						if (loss > maximumLossRightPattern) {
 							maximumLossRightPattern = loss;
 							maximumLossRightKey = key;
@@ -187,7 +187,7 @@ public class PatternFinalizer {
 					patternFinalized = false;
 
 					if (key + 2 <= patternQueue.size() + 1) {
-						loss = (patternQueue.size() + 2 - key) * value;
+						loss = (patternQueue.size() + 2 - (key+2)) * value;
 						if (loss > maximumLossBothPattern) {
 							maximumLossBothPattern = loss;
 							maximumLossBothKey = key;
@@ -222,9 +222,7 @@ public class PatternFinalizer {
 					patternCode.setExistingPattern(maximumSavingLeftKey);
 					patternCode.setCount(zeroPattern.getLeftPattern().get(maximumSavingLeftKey));
 					zeroPattern.getLeftPattern().put(maximumSavingLeftKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 2];
-					booleanPattern[0] = true;
-					dictionary.put(maximumSavingLeftKey, booleanPattern);
+					dictionary.put(maximumSavingLeftKey+"L", patternQueue.size() + 1);
 
 
 				} else if (leftRightSavingPattern == LeftRightPattern.rightPattern) {
@@ -232,30 +230,24 @@ public class PatternFinalizer {
 					patternCode.setExistingPattern(maximumSavingRightKey);
 					patternCode.setCount(zeroPattern.getRightPattern().get(maximumSavingRightKey));
 					zeroPattern.getRightPattern().put(maximumSavingRightKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 2];
-					booleanPattern[patternQueue.size() + 1] = true;
-					dictionary.put(maximumSavingRightKey, booleanPattern);
+					dictionary.put(maximumSavingRightKey+"R", patternQueue.size() + 1);
 				} else if (leftRightSavingPattern == LeftRightPattern.bothPattern) {
 
 					patternCode.setExistingPattern(maximumSavingBothKey);
 					patternCode.setCount(zeroPattern.getBothPattern().get(maximumSavingBothKey));
 					zeroPattern.getBothPattern().put(maximumSavingBothKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 3];
-					booleanPattern[0] = true;
-					booleanPattern[patternQueue.size() + 2] = true;
-					dictionary.put(maximumSavingBothKey, booleanPattern);
+					dictionary.put(maximumSavingBothKey+"B", patternQueue.size() + 1);
 				} else {
 
 					patternCode.setExistingPattern(maximumSavingSimpleKey);
 					patternCode.setCount(zeroPattern.getSimplePattern().get(maximumSavingSimpleKey));
 					zeroPattern.getSimplePattern().put(maximumSavingSimpleKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 1];
-					dictionary.put(maximumSavingSimpleKey, booleanPattern);
+					dictionary.put(maximumSavingSimpleKey+"S", patternQueue.size() + 1);
 
 				}
 
 				patternQueue.add(patternCode);
-				keySet.remove(patternCode.getExistingPattern());
+	//			keySet.remove(patternCode.getExistingPattern());
 
 			} else {
 				patternCode = new Pattern();
@@ -267,41 +259,33 @@ public class PatternFinalizer {
 					patternCode.setExistingPattern(maximumLossLeftKey);
 					patternCode.setCount(zeroPattern.getLeftPattern().get(maximumLossLeftKey));
 					zeroPattern.getLeftPattern().put(maximumLossLeftKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 2];
-					booleanPattern[0] = true;
-					dictionary.put(maximumLossLeftKey, booleanPattern);
+					dictionary.put(maximumLossLeftKey+"L", patternQueue.size() + 1);
 
 				} else if (leftRightLossPattern == LeftRightPattern.rightPattern) {
 
 					patternCode.setExistingPattern(maximumLossRightKey);
 					patternCode.setCount(zeroPattern.getRightPattern().get(maximumLossRightKey));
 					zeroPattern.getRightPattern().put(maximumLossRightKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 2];
-					booleanPattern[patternQueue.size() + 1] = true;
-					dictionary.put(maximumLossRightKey, booleanPattern);
+					dictionary.put(maximumLossRightKey+"R", patternQueue.size() + 1);
 
 				} else if (leftRightLossPattern == LeftRightPattern.bothPattern) {
 
 					patternCode.setExistingPattern(maximumLossBothKey);
 					patternCode.setCount(zeroPattern.getBothPattern().get(maximumLossBothKey));
 					zeroPattern.getBothPattern().put(maximumLossBothKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 3];
-					booleanPattern[0] = true;
-					booleanPattern[patternQueue.size() + 2] = true;
-					dictionary.put(maximumLossBothKey, booleanPattern);
+					dictionary.put(maximumLossBothKey+"B", patternQueue.size() + 1);
 
 				} else {
 
 					patternCode.setExistingPattern(maximumLossSimpleKey);
 					patternCode.setCount(zeroPattern.getSimplePattern().get(maximumLossSimpleKey));
 					zeroPattern.getSimplePattern().put(maximumLossSimpleKey, 0L);
-					boolean[] booleanPattern = new boolean[patternQueue.size() + 1];
-					dictionary.put(maximumLossSimpleKey, booleanPattern);
+					dictionary.put(maximumLossSimpleKey+"S", patternQueue.size() + 1);
 
 				}
 
 				patternQueue.add(patternCode);
-				keySet.remove(patternCode.getExistingPattern());
+	//			keySet.remove(patternCode.getExistingPattern());
 
 			}
 
@@ -314,7 +298,7 @@ public class PatternFinalizer {
 		return patternQueue;
 	}
 
-	public Map<Long, boolean[]> getDictionary() {
+	public Map<String, Integer> getDictionary() {
 		return dictionary;
 	}
 

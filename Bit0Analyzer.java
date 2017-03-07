@@ -8,14 +8,12 @@ import java.util.Queue;
 
 public class Bit0Analyzer {
 
-
-	
 	private String inputFileName;
 
 	private int bufferSize;
 
 	private long inputByteCount;
-	
+
 	private ZeroPattern zeroPattern;
 
 	public Bit0Analyzer(int bufferSize, String inputFileName) throws IOException {
@@ -29,7 +27,6 @@ public class Bit0Analyzer {
 	public long getInputByteCount() {
 		return inputByteCount;
 	}
-
 
 	public ZeroPattern getZeroPattern() {
 		return zeroPattern;
@@ -57,7 +54,7 @@ public class Bit0Analyzer {
 
 			// this will have the total bytes read from the file
 			inputByteCount += bytesRead * 8;
-			System.out.println(inputByteCount);
+			//System.out.println(inputByteCount);
 
 			byteIndex = 0;
 			// Loop through all the bytes read into buffer
@@ -136,6 +133,51 @@ public class Bit0Analyzer {
 				}
 				byteIndex++;
 			}
+		
+			if (queueForRight.size() > 0) {
+				countOf0 = queueForRight.remove();
+				numberOf1--;
+
+				if (numberOf1 > 0) {
+					rightSet = true;
+				}
+				
+					if (rightSet && leftSet) {
+						Long mapValue = bothPattern.get(countOf0);
+						if (mapValue == null) {
+							bothPattern.put(countOf0, 1L);
+						} else {
+							bothPattern.put(countOf0, mapValue + 1);
+						}
+					} else if (leftSet) {
+						Long mapValue = leftPattern.get(countOf0);
+						if (mapValue == null) {
+							leftPattern.put(countOf0, 1L);
+						} else {
+							leftPattern.put(countOf0, mapValue + 1);
+						}
+					} else if (rightSet) {
+						Long mapValue = rightPattern.get(countOf0);
+						if (mapValue == null) {
+							rightPattern.put(countOf0, 1L);
+						} else {
+							rightPattern.put(countOf0, mapValue + 1);
+						}
+					}else {
+						Long mapValue = simplePattern.get(countOf0);
+						if (mapValue == null) {
+							simplePattern.put(countOf0, 1L);
+						} else {
+							simplePattern.put(countOf0, mapValue + 1);
+						}
+					}
+				
+			}
+
+			
+			
+			
+			
 		}
 		fileInputStream.close();
 	}
